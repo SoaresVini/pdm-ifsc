@@ -22,7 +22,9 @@ Um nível da API é um valor inteiro que identifica unicamente a revisão da API
 
 Permite que o programador crie layouts para o seu app, com ele você pode posicionar elementos combináveis em relação a outros elementos na tela.
 
-"wrap_content" instrui a visualização a definir o próprio tamanho como for necessário para ajustar o conteúdo a ela.
-"match_parent" faz a visualização expandir o máximo possível dentro da visualização mãe.
+"wrap_content" visualização é definida conforme  definir o próprio tamanho como for necessário para ajustar o conteúdo a ela.
+
+"match_parent" Expande a visualização ao máximo na visualização mãe.
+
 
 
