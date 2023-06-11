@@ -7,10 +7,15 @@
     android:orientation="vertical"
     tools:context=".View.ActivityNotasMain">
 
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="662dp" />
+
     <Button
         android:id="@+id/button"
-        android:layout_width="427dp"
-        android:layout_height="wrap_content"
-        android:onClick="NovaNota"
-        android:text="Button" />
+        android:layout_width="match_parent"
+        android:layout_height="71dp"
+        android:text="Nova Nota" />
+
 </LinearLayout>

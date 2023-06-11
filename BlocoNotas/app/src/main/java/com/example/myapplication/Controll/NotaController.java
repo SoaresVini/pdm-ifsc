@@ -23,15 +23,15 @@ public class NotaController {
         return notasDAO.inserirNota(n);
     }
 
-    public Nota getNota(Integer id){
-        return null;
+    public Nota updateNota(Nota nota){
+        return notasDAO.atualizarNota(nota);
     }
 
     public ArrayList<Nota> getListNota(){
-        return null;
+        return (ArrayList<Nota>) notasDAO.listarNotas();
     }
 
-    public boolean DeletarNota(Nota nota){
-        return false;
+    public boolean DeletarNota(int id){
+        return notasDAO.excluirNota(id);
     }
 }
