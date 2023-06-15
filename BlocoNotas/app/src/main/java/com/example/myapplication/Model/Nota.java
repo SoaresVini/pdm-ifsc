@@ -2,11 +2,11 @@ package com.example.myapplication.Model;
 
 public class Nota {
 
-    Integer idNota;
+    long idNota;
 
     String titulo, txt;
 
-    public Nota(Integer idNota, String titulo, String txt) {
+    public Nota(Long idNota, String titulo, String txt) {
         this.idNota = idNota;
         this.titulo = titulo;
         this.txt = txt;
@@ -17,11 +17,11 @@ public class Nota {
         this.txt = txt;
     }
 
-    public Integer getIdNota() {
+    public Long getIdNota() {
         return idNota;
     }
 
-    public void setIdNota(Integer idNota) {
+    public void setIdNota(Long idNota) {
         this.idNota = idNota;
     }
 

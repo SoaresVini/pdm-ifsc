@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.example.myapplication.Controll.NotaController;
@@ -33,10 +32,6 @@ public class ActivityNotasMain extends AppCompatActivity {
         controller = new NotaController(this);
         List<Nota> notas = controller.getListNota();
 
-        adapter = new NotaAdapter(this, notas);
-
-        listView.setAdapter(adapter);
-
         Button btn = findViewById(R.id.button);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,8 +42,8 @@ public class ActivityNotasMain extends AppCompatActivity {
     }
 
     private void abreNota(){
-        Intent i = new Intent(ActivityNotasMain.this, ActivityExibeNota.class);
-        startActivity(i);
+        Intent intent = new Intent(this, ActivityExibeNota.class);
+        startActivity(intent);
     }
 
 
