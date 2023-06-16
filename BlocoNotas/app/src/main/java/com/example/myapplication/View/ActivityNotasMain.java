@@ -20,6 +20,7 @@ public class ActivityNotasMain extends AppCompatActivity {
     private ListView listView;
     static NotaAdapter adapter;
 
+    Button novaNota;
     private NotaController controller;
 
     @Override
@@ -27,31 +28,36 @@ public class ActivityNotasMain extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getSupportActionBar().setTitle("Bloquinho de Notas do Vini");
+        getSupportActionBar().setTitle("Bloco de Notas");
+
+        setContentView(R.layout.activity_main);
+
+        listView = findViewById(R.id.list);
+
 
         controller = new NotaController(this);
-        List<Nota> notas = controller.getListNota();
+        List<Nota> itemList = controller.getListNota();
+        adapter = new NotaAdapter(this, itemList);
 
-        Button btn = findViewById(R.id.button);
-        btn.setOnClickListener(new View.OnClickListener() {
+        listView.setAdapter(adapter);
+
+        Button button = findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                abreNota();
+            public void onClick(View view) {
+                abrirNota();
             }
         });
     }
 
-    private void abreNota(){
-        Intent intent = new Intent(this, ActivityExibeNota.class);
+    private void abrirNota() {
+        Intent intent = new Intent(ActivityNotasMain.this, ActivityExibeNota.class);
         startActivity(intent);
     }
 
-
-    public static void reloadList(List<Nota> list) {
+    public static void carregaTudo(List<Nota> list) {
         adapter.clear();
         adapter.addAll(list);
-
-        // Notifica o adaptador sobre as mudanças nos dados
         adapter.notifyDataSetChanged();
     }
 

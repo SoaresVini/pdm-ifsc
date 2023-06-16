@@ -2,9 +2,9 @@ package com.example.myapplication.Model;
 
 public class Nota {
 
-    long idNota;
+    private long idNota;
 
-    String titulo, txt;
+    private String titulo, txt;
 
     public Nota(Long idNota, String titulo, String txt) {
         this.idNota = idNota;

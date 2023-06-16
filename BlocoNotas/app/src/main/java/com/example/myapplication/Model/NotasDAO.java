@@ -37,44 +37,59 @@ public class NotasDAO {
         return n;
     }
 
-    public Nota atualizarNota(Nota nota) {
-        ContentValues cv = new ContentValues();
-        cv.put(COLUMN_TITULO, nota.getTitulo());
-        cv.put(COLUMN_TEXTO, nota.getTxt());
+    @SuppressLint("Range")
+    public Nota getNota(Long id) {
+        String selection = COLUMN_ID + " = ?";
+        String[] selectionArgs = {String.valueOf(id)};
 
-        int rowsAffected = database.update(TABLE_NOTAS, cv, COLUMN_ID + "=?", new String[]{String.valueOf(nota.getIdNota())});
-
-        if (rowsAffected > 0) {
+        Cursor cursor = database.query(TABLE_NOTAS, null, selection, selectionArgs, null, null, null);
+        if (cursor.moveToFirst()) {
+            Nota nota;
+            nota = new Nota(
+                    cursor.getLong(cursor.getColumnIndex(COLUMN_ID)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_TITULO)),
+                    cursor.getString(cursor.getColumnIndex(COLUMN_TEXTO))
+            );
+            cursor.close();
             return nota;
-        } else {
-            return null;
         }
+        cursor.close();
+        return null;
     }
 
-    public boolean excluirNota(int id) {
+    public Boolean atualizarNota(Nota nota) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_TITULO, nota.getTitulo());
+        contentValues.put(COLUMN_TEXTO, nota.getTxt());
+
+        String whereClause = COLUMN_ID + " = ?";
+        String[] whereArgs = {String.valueOf(nota.getIdNota())};
+
+        int rowsAffected = database.update(TABLE_NOTAS, contentValues, whereClause, whereArgs);
+        return rowsAffected > 0;
+    }
+
+    public boolean excluirNota(Long id) {
         int rowsAffected = database.delete(TABLE_NOTAS, COLUMN_ID + "=?", new String[]{String.valueOf(id)});
         return rowsAffected > 0;
     }
 
     @SuppressLint("Range")
-    public List<Nota> listarNotas() {
-        List<Nota> notas = new ArrayList<>();
-
+    public List<Nota> listaNotas() {
+        List<Nota> listaNotas = new ArrayList<>();
         Cursor cursor = database.query(TABLE_NOTAS, null, null, null, null, null, null);
-
         if (cursor.moveToFirst()) {
             do {
-                long id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
-                String titulo = cursor.getString(cursor.getColumnIndex(COLUMN_TITULO));
-                String texto = cursor.getString(cursor.getColumnIndex(COLUMN_TEXTO));
-
-                Nota nota = new Nota(id, titulo, texto);
-                notas.add(nota);
+                @SuppressLint("Range") Nota note = new Nota(
+                        cursor.getLong(cursor.getColumnIndex(COLUMN_ID)),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_TITULO)),
+                        cursor.getString(cursor.getColumnIndex(COLUMN_TEXTO))
+                );
+                listaNotas.add(note);
             } while (cursor.moveToNext());
         }
-
         cursor.close();
-        return notas;
+        return listaNotas;
     }
 
     private static class DatabaseHelper extends SQLiteOpenHelper {

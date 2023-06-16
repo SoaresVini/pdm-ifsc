@@ -6,6 +6,7 @@ import com.example.myapplication.Model.Nota;
 import com.example.myapplication.Model.NotasDAO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.Nullable;
 
@@ -23,15 +24,18 @@ public class NotaController {
         return notasDAO.inserirNota(n);
     }
 
-    public Nota updateNota(Nota nota){
+    public Boolean updateNota(Nota nota){
         return notasDAO.atualizarNota(nota);
     }
 
-    public ArrayList<Nota> getListNota(){
-        return (ArrayList<Nota>) notasDAO.listarNotas();
+    public List<Nota> getListNota(){
+        return notasDAO.listaNotas();
     }
 
-    public boolean DeletarNota(int id){
+    public boolean deletarNota(Long id){
         return notasDAO.excluirNota(id);
     }
+
+    public Nota getNota(Long id){return notasDAO.getNota(id);}
+
 }
